@@ -1,0 +1,718 @@
+/*!
+ * Bootstrap-reverse v0.0.4 (http://javatmp.com)
+ * Bootstrap 4.0.0 RTL for Right to left directional languages like Arabic,Persian,Hebrew and Urdu.
+ * Copyright 2018 JavaTMP
+ * Licensed under MIT (https://github.com/JavaTMP/bootstrap-reverse/blob/master/LICENSE)
+ */
+
+@import "../node_modules/bootstrap/scss/functions";
+@import "../node_modules/bootstrap/scss/variables";
+@import "../node_modules/bootstrap/scss/mixins";
+
+// From @import "../node_modules/bootstrap/scss/mixins/_caret.scss
+@mixin caret-rtl($direction: down) {
+    @if $enable-caret {
+        &::after {
+            margin-left: 0;
+            margin-right: $caret-width * .85;
+            @if $direction == down {
+                @include caret-down;
+            } @else if $direction == up {
+                @include caret-up;
+            } @else if $direction == right {
+                @include caret-right;
+            }
+        }
+        @if $direction == left {
+            &::before {
+                margin-right: 0;
+                margin-left: $caret-width * .85;
+            }
+        }
+        &:empty::after {
+            margin-right: 0;
+        }
+    }
+}
+
+// From @import "../node_modules/bootstrap/scss/mixins/_grid-framework.scss
+
+@mixin make-grid-columns-rtl($columns: $grid-columns, $gutter: $grid-gutter-width, $breakpoints: $grid-breakpoints) {
+    @each $breakpoint in map-keys($breakpoints) {
+        $infix: breakpoint-infix($breakpoint, $breakpoints);
+
+        @include media-breakpoint-up($breakpoint, $breakpoints) {
+            // `$columns - 1` because offsetting by the width of an entire row isn't possible
+            @for $i from 0 through ($columns - 1) {
+                @if not ($infix == "" and $i == 0) {
+                    // Avoid emitting useless .offset-0
+                    .offset#{$infix}-#{$i} {
+                        @include make-col-offset-rtl($i, $columns);
+                    }
+                }
+            }
+        }
+    }
+}
+
+// From @import "../node_modules/bootstrap/scss/mixins/_grid.scss
+
+@mixin make-col-offset-rtl($size, $columns: $grid-columns) {
+    $num: $size / $columns;
+    margin-left: 0;
+    margin-right: if($num == 0, 0, percentage($num));
+}
+
+// From @import "../node_modules/bootstrap/scss/mixins/_float.scss
+// From @import "../node_modules/bootstrap/scss/reboot";
+
+body {
+    text-align: right;
+    direction: rtl;
+}
+
+dd {
+    margin-left: initial;
+    margin-right: 0;
+
+}
+
+caption {
+    text-align: right;
+}
+
+// From @import "../node_modules/bootstrap/scss/type";
+
+.list-unstyled {
+    padding-right: 0;
+}
+
+// Inline turns list items into inline-block
+.list-inline {
+    padding-right: 0;
+}
+.list-inline-item {
+    &:not(:last-child) {
+        margin-right: 0;
+        margin-left: $list-inline-padding;
+    }
+}
+// From @import "../node_modules/bootstrap/scss/grid";
+
+@if $enable-grid-classes {
+    @include make-grid-columns-rtl();
+}
+
+
+// From @import "../node_modules/bootstrap/scss/forms";
+
+.form-check {
+    padding-left: 0;
+    padding-right: $form-check-input-gutter;
+}
+
+.form-check-input {
+    margin-left: 0;
+    margin-right: -$form-check-input-gutter;
+}
+
+.form-check-inline {
+    padding-right: 0;
+    margin-right: 0;
+    margin-left: $form-check-inline-margin-x;
+    .form-check-input {
+        margin-left: $form-check-inline-input-margin-x;
+        margin-right: 0;
+    }
+}
+
+.form-inline {
+    @include media-breakpoint-up(sm) {
+        .form-check {
+            padding-right: 0;
+        }
+        .form-check-input {
+            margin-left: $form-check-input-margin-x;
+            margin-right: 0;
+        }
+    }
+}
+// From @import "../node_modules/bootstrap/scss/buttons";
+// From @import "../node_modules/bootstrap/scss/dropdown";
+
+.dropdown-toggle {
+    // Generate the caret automatically
+    @include caret-rtl;
+}
+
+.dropdown-menu {
+    right: 0;
+    left: auto;
+    float: right;
+    text-align: right;
+}
+
+.dropup {
+    .dropdown-toggle {
+        @include caret-rtl(up);
+    }
+}
+
+
+.dropright {
+    .dropdown-menu {
+        margin-left: 0;
+        margin-right: $dropdown-spacer;
+    }
+    .dropdown-toggle {
+        @include caret-rtl(left);
+    }
+}
+
+.dropleft {
+    .dropdown-menu {
+        margin-right: 0;
+        margin-left: $dropdown-spacer;
+    }
+
+    .dropdown-toggle {
+        @include caret-rtl(right);
+    }
+}
+
+// From @import "../node_modules/bootstrap/scss/button-group";
+
+.btn-group,
+.btn-group-vertical {
+    .btn + .btn,
+    .btn + .btn-group,
+    .btn-group + .btn,
+    .btn-group + .btn-group {
+        margin-left: 0;
+        margin-right: -$btn-border-width;
+    }
+}
+
+/******* check here for error regarding border radius ****/
+.btn-group {
+    > .btn:first-child {
+        margin-right: 0;
+    }
+
+    // Reset rounded corners
+    > .btn:not(:last-child):not(.dropdown-toggle),
+        > .btn-group:not(:last-child) > .btn {
+        @include border-right-radius($btn-border-radius);
+        @include border-left-radius(0);
+        &.btn-lg {
+            @include border-right-radius($btn-border-radius-lg);
+            @include border-left-radius(0);
+        }
+        &.btn-sm {
+            @include border-right-radius($btn-border-radius-sm);
+            @include border-left-radius(0);
+        }
+    }
+
+    > .btn:not(:first-child),
+        > .btn-group:not(:first-child) > .btn {
+        @include border-right-radius(0);
+        @include border-left-radius($btn-border-radius);
+        &.btn-lg {
+            @include border-left-radius($btn-border-radius-lg);
+            @include border-right-radius(0);
+        }
+        &.btn-sm {
+            @include border-left-radius($btn-border-radius-sm);
+            @include border-right-radius(0);
+        }
+    }
+    > .btn:not(:last-child):not(:first-child):not(.dropdown-toggle),
+        > .btn-group:not(:first-child):not(:last-child) > .btn {
+        @include border-radius(0);
+    }
+}
+
+.dropdown-toggle-split {
+    &::after {
+        margin-right: 0;
+    }
+}
+
+.btn-group-vertical {
+    > .btn + .btn,
+    > .btn + .btn-group,
+    > .btn-group + .btn,
+    > .btn-group + .btn-group {
+        margin-right: 0;
+    }
+
+    // Reset rounded corners
+    > .btn:not(:last-child):not(.dropdown-toggle),
+        > .btn-group:not(:last-child) > .btn {
+        @include border-bottom-radius(0);
+    }
+
+    > .btn:not(:first-child),
+        > .btn-group:not(:first-child) > .btn {
+        @include border-top-radius(0);
+    }
+}
+
+// From @import "../node_modules/bootstrap/scss/input-group";
+
+/****** We must check here *******************/
+.input-group {
+    > .form-control,
+    > .custom-select,
+    > .custom-file {
+        + .form-control,
+        + .custom-select,
+        + .custom-file {
+            margin-left: 0;
+            margin-right: -$input-border-width;
+        }
+    }
+
+    > .form-control,
+    > .custom-select {
+        &:not(:last-child) {
+            @include border-left-radius(0);
+            @include border-right-radius($input-border-radius);
+        }
+        &:not(:first-child) {
+            @include border-right-radius(0);
+            @include border-left-radius($input-border-radius);
+        }
+        &:not(:last-child):not(:first-child) {
+            @include border-radius(0);
+        }
+    }
+
+    > .custom-file {
+        &:not(:last-child) .custom-file-label, &:not(:last-child) .custom-file-label::before {
+            @include border-left-radius(0);
+            @include border-right-radius($custom-file-border-radius);
+        }
+        &:not(:first-child) .custom-file-label, &:not(:first-child) .custom-file-label::before {
+            @include border-right-radius(0);
+            @include border-left-radius($custom-file-border-radius);
+        }
+        &:not(:first-child):not(:last-child) .custom-file-label, &:not(:first-child):not(:last-child) .custom-file-label::before {
+            @include border-radius(0);
+        }
+    }
+}
+.input-group.input-group-lg {
+    > .form-control,
+    > .custom-select {
+        &:not(:last-child) {
+            @include border-left-radius(0);
+            @include border-right-radius($input-border-radius-lg);
+        }
+        &:not(:first-child) {
+            @include border-right-radius(0);
+            @include border-left-radius($input-border-radius-lg);
+        }
+        &:not(:last-child):not(:first-child) {
+            @include border-radius(0);
+        }
+    }
+
+    > .custom-file {
+        &:not(:last-child) .custom-file-label, &:not(:last-child) .custom-file-label::before {
+            @include border-left-radius(0);
+            @include border-right-radius($input-border-radius-lg);
+        }
+        &:not(:first-child) .custom-file-label, &:not(:first-child) .custom-file-label::before {
+            @include border-right-radius(0);
+            @include border-left-radius($input-border-radius-lg);
+        }
+        &:not(:first-child):not(:last-child) .custom-file-label, &:not(:first-child):not(:last-child) .custom-file-label::before {
+            @include border-radius(0);
+        }
+    }
+}
+.input-group.input-group-sm {
+    > .form-control,
+    > .custom-select {
+        &:not(:last-child) {
+            @include border-left-radius(0);
+            @include border-right-radius($input-border-radius-sm);
+        }
+        &:not(:first-child) {
+            @include border-right-radius(0);
+            @include border-left-radius($input-border-radius-sm);
+        }
+        &:not(:last-child):not(:first-child) {
+            @include border-radius(0);
+        }
+    }
+
+    > .custom-file {
+        &:not(:last-child) .custom-file-label, &:not(:last-child) .custom-file-label::before {
+            @include border-left-radius(0);
+            @include border-right-radius($input-border-radius-sm);
+        }
+        &:not(:first-child) .custom-file-label, &:not(:first-child) .custom-file-label::before {
+            @include border-right-radius(0);
+            @include border-left-radius($input-border-radius-sm);
+        }
+        &:not(:first-child):not(:last-child) .custom-file-label, &:not(:first-child):not(:last-child) .custom-file-label::before {
+            @include border-radius(0);
+        }
+    }
+}
+
+.input-group-prepend,
+.input-group-append {
+    .btn + .btn,
+    .btn + .input-group-text,
+    .input-group-text + .input-group-text,
+    .input-group-text + .btn {
+        margin-left: 0;
+        margin-right: -$input-border-width;
+    }
+}
+
+.input-group-prepend {
+    margin-right: 0;
+    margin-left: -$input-border-width;
+}
+.input-group-append {
+    margin-left: 0;
+    margin-right: -$input-border-width;
+}
+
+/****** We must check here *******************/
+.input-group > .input-group-prepend > .btn,
+.input-group > .input-group-prepend > .input-group-text,
+.input-group > .input-group-append:not(:last-child) > .btn,
+.input-group > .input-group-append:not(:last-child) > .input-group-text,
+.input-group > .input-group-append:last-child > .btn:not(:last-child):not(.dropdown-toggle),
+.input-group > .input-group-append:last-child > .input-group-text:not(:last-child) {
+    @include border-left-radius(0);
+
+}
+/****** We must check here *******************/
+.input-group > .input-group-append > .btn,
+.input-group > .input-group-append > .input-group-text,
+.input-group > .input-group-prepend:not(:first-child) > .btn,
+.input-group > .input-group-prepend:not(:first-child) > .input-group-text,
+.input-group > .input-group-prepend:first-child > .btn:not(:first-child),
+.input-group > .input-group-prepend:first-child > .input-group-text:not(:first-child) {
+    @include border-right-radius(0);
+}
+.input-group > .input-group-prepend:first-child > .btn {
+    @include border-right-radius($btn-border-radius);
+}
+.input-group.input-group-lg > .input-group-prepend:first-child > .btn {
+    @include border-right-radius($btn-border-radius-lg);
+}
+.input-group.input-group-sm > .input-group-prepend:first-child > .btn {
+    @include border-right-radius($btn-border-radius-sm);
+}
+
+.input-group > .input-group-prepend:first-child > .input-group-text {
+    @include border-right-radius($input-border-radius);
+}
+.input-group.input-group-lg > .input-group-prepend:first-child > .input-group-text {
+    @include border-right-radius($input-border-radius-lg);
+}
+.input-group.input-group-sm > .input-group-prepend:first-child > .input-group-text {
+    @include border-right-radius($input-border-radius-sm);
+}
+
+.input-group > .input-group-append:last-child > .btn {
+    @include border-left-radius($btn-border-radius);
+}
+.input-group.input-group-lg > .input-group-append:last-child > .btn {
+    @include border-left-radius($btn-border-radius-lg);
+}
+.input-group.input-group-sm > .input-group-append:last-child > .btn {
+    @include border-left-radius($btn-border-radius-sm);
+}
+
+.input-group > .input-group-append:last-child > .input-group-text {
+    @include border-left-radius($input-border-radius);
+}
+.input-group.input-group-lg > .input-group-append:last-child > .input-group-text {
+    @include border-left-radius($input-border-radius-lg);
+}
+.input-group.input-group-sm > .input-group-append:last-child > .input-group-text {
+    @include border-left-radius($input-border-radius-sm);
+}
+
+// From @import "../node_modules/bootstrap/scss/custom-forms";
+
+.custom-control {
+    padding-left: 0;
+    padding-right: $custom-control-gutter;
+}
+
+.custom-control-inline {
+    margin-right: 0;
+    margin-left: $custom-control-spacer-x;
+}
+
+.custom-control-label {
+    // Background-color and (when enabled) gradient
+    &::before {
+        right: 0;
+    }
+
+    &::after {
+        right: 0;
+    }
+}
+
+.custom-select {
+    padding: $custom-select-padding-y $custom-select-padding-x $custom-select-padding-y ($custom-select-padding-x + $custom-select-indicator-padding) ;
+    background: $custom-select-bg $custom-select-indicator no-repeat left $custom-select-padding-x center;
+    background-size: $custom-select-bg-size;
+    &[multiple],
+    &[size]:not([size="1"]) {
+        padding-right: 0;
+        padding-left: $custom-select-padding-x;
+    }
+}
+
+$custom-file-text: (
+ar: "ملف"
+);
+
+.custom-file-input {
+    @each $lang, $value in $custom-file-text {
+        &:lang(#{$lang}) ~ .custom-file-label::after {
+            content: $value;
+        }
+    }
+}
+
+
+.custom-file-label {
+    &::after {
+        right: auto;
+        left: 0;
+        border-left: none;
+        border-right: $custom-file-border-width solid $custom-file-border-color;
+        @include border-radius($custom-file-border-radius 0 0 $custom-file-border-radius);
+    }
+}
+
+
+// From @import "../node_modules/bootstrap/scss/nav";
+
+.nav {
+    padding-right: 0;
+}
+
+// From @import "../node_modules/bootstrap/scss/navbar";
+
+.navbar-brand {
+    margin-right: 0;
+    margin-left: $navbar-padding-x;
+}
+
+.navbar-nav {
+    padding-right: 0;
+}
+
+// From @import "../node_modules/bootstrap/scss/card";
+
+.card-link {
+    + .card-link {
+        margin-right: $card-spacer-x;
+        margin-left: 0;
+    }
+}
+
+/****** We must check here *******************/
+.card-group {
+    @include media-breakpoint-up(sm) {
+        > .card {
+            + .card {
+                margin-right: 0;
+                border-right: 0;
+                border-left: $card-border-width solid $card-border-color;
+            }
+
+            // Handle rounded corners
+            @if $enable-rounded {
+                &:first-child {
+                    @include border-left-radius(0);
+                    @include border-right-radius($card-border-radius);
+                    .card-img-top,
+                    .card-header {
+                        border-top-left-radius: 0;
+                        border-top-right-radius: $card-border-radius;
+                    }
+                    .card-img-bottom,
+                    .card-footer {
+                        border-bottom-left-radius: 0;
+                        border-bottom-right-radius: $card-border-radius;
+                    }
+                }
+
+                &:last-child {
+                    @include border-right-radius(0);
+                    @include border-left-radius($card-border-radius);
+                    .card-img-top,
+                    .card-header {
+                        border-top-right-radius: 0;
+                        border-top-left-radius: $card-border-radius;
+                    }
+                    .card-img-bottom,
+                    .card-footer {
+                        border-bottom-right-radius: 0;
+                        border-bottom-left-radius: $card-border-radius;
+                    }
+                }
+            }
+
+        }
+    }
+}
+
+// From @import "../node_modules/bootstrap/scss/pagination";
+
+.page-link {
+    margin-left: 0;
+    margin-right: -$pagination-border-width;
+}
+
+.page-item {
+    &:first-child {
+        .page-link {
+            margin-right: 0;
+            @include border-left-radius(0);
+            @include border-right-radius($border-radius);
+        }
+    }
+    &:last-child {
+        .page-link {
+            @include border-right-radius(0);
+            @include border-left-radius($border-radius);
+        }
+    }
+}
+
+.pagination-lg {
+    .page-item {
+        &:first-child {
+            .page-link {
+                @include border-left-radius(0);
+                @include border-right-radius($border-radius-lg);
+            }
+        }
+        &:last-child {
+            .page-link {
+                @include border-right-radius(0);
+                @include border-left-radius($border-radius-lg);
+            }
+        }
+    }
+}
+
+.pagination-sm {
+    .page-item {
+        &:first-child {
+            .page-link {
+                @include border-left-radius(0);
+                @include border-right-radius($border-radius-sm);
+            }
+        }
+        &:last-child {
+            .page-link {
+                @include border-right-radius(0);
+                @include border-left-radius($border-radius-sm);
+            }
+        }
+    }
+}
+// From @import "../node_modules/bootstrap/scss/alert";
+
+.alert-dismissible {
+    padding-left: ($close-font-size + $alert-padding-x * 2);
+    padding-right: $alert-padding-x;
+
+    // Adjust close link position
+    .close {
+        right: auto;
+        left: 0;
+    }
+}
+
+// From @import "../node_modules/bootstrap/scss/list-group";
+
+.list-group {
+    padding-right: 0; // reset padding because ul and ol
+}
+
+// From @import "../node_modules/bootstrap/scss/close";
+.close {
+    float: left;
+}
+
+// From @import "../node_modules/bootstrap/scss/modal";
+
+// Modal header
+// Top section of the modal w/ title and dismiss
+.modal-header {
+    .close {
+        // auto on the right force icon to the right even when there is no .modal-title
+        margin: (-$modal-header-padding) auto (-$modal-header-padding) (-$modal-header-padding);
+    }
+}
+
+// Footer (for actions)
+.modal-footer {
+    // Easily place margin between footer elements
+    > :not(:first-child) { margin-right: .25rem; }
+    > :not(:last-child) { margin-left: .25rem; }
+}
+
+// From @import "../node_modules/bootstrap/scss/carousel";
+
+.carousel-item-next,
+.active.carousel-item-right {
+    transform: translateX(-100%);
+    @supports (transform-style: preserve-3d) {
+        transform: translate3d(-100%, 0, 0);
+    }
+}
+
+.carousel-item-prev,
+.active.carousel-item-left {
+    transform: translateX(100%);
+    @supports (transform-style: preserve-3d) {
+        transform: translate3d(100%, 0, 0);
+    }
+
+}
+
+.carousel-control-prev {
+    left: auto;
+    right: 0;
+}
+.carousel-control-next {
+    right: auto;
+    left: 0;
+}
+.carousel-control-prev-icon {
+    background-image: $carousel-control-next-icon-bg;
+}
+.carousel-control-next-icon {
+    background-image: $carousel-control-prev-icon-bg;
+}
+.carousel-indicators {
+    padding-right: 0;
+    li {
+        &::before {
+            right: 0;
+        }
+        &::after {
+            right: 0;
+        }
+    }
+}

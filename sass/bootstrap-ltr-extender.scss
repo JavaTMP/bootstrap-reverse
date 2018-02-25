@@ -1,0 +1,76 @@
+/*!
+ * bootstrap-reverse v0.0.4 (http://javatmp.com)
+ * Bootstrap 4.0.0 RTL for Right to left directional languages like Arabic,Persian,Hebrew and Urdu.
+ * Copyright 2018 JavaTMP
+ * Licensed under MIT (https://github.com/JavaTMP/bootstrap-reverse/blob/master/LICENSE)
+ */
+
+@import "../node_modules/bootstrap/scss/functions";
+@import "../node_modules/bootstrap/scss/variables";
+@import "../node_modules/bootstrap/scss/mixins";
+
+// From @import "../node_modules/bootstrap/scss/utilities/_borders.scss
+// stylelint-disable declaration-no-important
+
+.border-end   { border-right: $border-width solid $border-color !important; }
+.border-start    { border-left: $border-width solid $border-color !important; }
+
+.border-start-0  { border-left: 0 !important; }
+.border-end-0   { border-right: 0 !important; }
+
+.rounded-start {
+    border-top-left-radius: $border-radius !important;
+    border-bottom-left-radius: $border-radius !important;
+}
+
+.rounded-end {
+    border-top-right-radius: $border-radius !important;
+    border-bottom-right-radius: $border-radius !important;
+}
+
+// From @import "../node_modules/bootstrap/scss/utilities/_float.scss
+@each $breakpoint in map-keys($grid-breakpoints) {
+    @include media-breakpoint-up($breakpoint) {
+        $infix: breakpoint-infix($breakpoint, $grid-breakpoints);
+        .float#{$infix}-start { @include float-left; }
+        .float#{$infix}-end  { @include float-right; }
+    }
+}
+
+// From @import "../node_modules/bootstrap/scss/utilities/_spacing.scss
+@each $breakpoint in map-keys($grid-breakpoints) {
+    @include media-breakpoint-up($breakpoint) {
+        $infix: breakpoint-infix($breakpoint, $grid-breakpoints);
+
+        @each $prop, $abbrev in (margin: m, padding: p) {
+            @each $size, $length in $spacers {
+                .#{$abbrev}-s#{$infix}-#{$size} {
+                    #{$prop}-right: 0!important;
+                    #{$prop}-left: $length !important;
+                }
+                .#{$abbrev}-e#{$infix}-#{$size} {
+                    #{$prop}-left: 0!important;
+                    #{$prop}-right: $length !important;
+                }
+            }
+        }
+
+        .ms#{$infix}-auto {
+            margin-right: 0!important;
+            margin-left: auto !important;
+        }
+        .me#{$infix}-auto {
+            margin-left: 0!important;
+            margin-right: auto !important;
+        }
+    }
+}
+
+// From @import "../node_modules/bootstrap/scss/utilities/_text.scss
+@each $breakpoint in map-keys($grid-breakpoints) {
+    @include media-breakpoint-up($breakpoint) {
+        $infix: breakpoint-infix($breakpoint, $grid-breakpoints);
+        .text#{$infix}-start { text-align: left !important; }
+        .text#{$infix}-end { text-align: right !important; }
+    }
+}

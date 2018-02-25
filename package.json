@@ -1,0 +1,35 @@
+{
+    "name": "bootstrap-reverse",
+    "version": "1.0.3",
+    "description": "Bootstrap 4 RTL for Right to left directional languages like Arabic,Persian,Hebrew and Urdu.",
+    "keywords": [
+        "bootstrap",
+        "bootstrap-rtl",
+        "arabic",
+        "persian",
+        "hebrew",
+        "urdu",
+        "rtl"
+    ],
+    "author": "javatmp",
+    "license": "MIT",
+    "contributors": [],
+    "dependencies": {
+        "jquery": "^3.3.1",
+        "popper.js": "^1.13.0",
+        "bootstrap": "^4.0.0"
+    },
+    "devDependencies": {
+        "gulp": "^3.9.1",
+        "gulp-sass": "^3.1.0",
+        "gulp-autoprefixer": "^4.0.0",
+        "gulp-clean-css": "^3.7.0",
+        "gulp-rename": "^1.2.2",
+        "del": "^3.0.0"
+    },
+    "scripts": {},
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/JavaTMP/bootstrap-reverse.git"
+    }
+}
