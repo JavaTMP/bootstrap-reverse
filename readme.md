@@ -25,7 +25,7 @@ Case | Files To Use | Note
 Only Left-to-Right languages  | Don't use this package at all | The default bootstrap layout is left-to-right, so you don't need this package at all.
 Only Right-to-Left languages | Use foundation version only  | Foundation version will not reset any class with name left/right and r/l.
 Multilingual and Uses BOTH Direction like English and Arabic, And You don't care for semantic error  | Use bootstrap-reverse version | This version update all bootstrap classes relating to LEFT/RIGHT direction, BUT provides semantic errors and it is best to start stlying your site from English first.
-Multilingual and Uses BOTH Direction like English and Arabic, And You care for semantic error but You don't care for adding new unofficial classes  | Use bootstrap-reverse-extender version | This version will introduce new classes for every bootstrap class containing left or right with default/reverse alternatives.
+Multilingual and Uses BOTH Direction like English and Arabic, And You care for semantic error but You don't care for adding new unofficial classes  | Use bootstrap-reverse-extender version | This version will introduce new classes for every bootstrap class containing left or right with start/end alternatives.
 
 ## Major Issues
 - Dropdown width and positions. we solve the dropdown issues by the following Javascript hack:
