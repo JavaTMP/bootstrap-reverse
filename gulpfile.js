@@ -15,7 +15,7 @@ gulp.task('sass', ["delete-css"], function () {
         './sass/bootstrap-foundation.scss',
         './sass/bootstrap-reverse.scss',
         './sass/bootstrap-ltr-extender.scss',
-        './sass/bootstrap-extender.scss',
+        './sass/bootstrap-extender.scss'
     ])
             .pipe(sass().on('error', sass.logError))
             .pipe(autoprefixer({
