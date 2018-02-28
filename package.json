@@ -1,6 +1,6 @@
 {
     "name": "bootstrap-reverse",
-    "version": "1.0.4",
+    "version": "1.0.5",
     "description": "Bootstrap 4 RTL for Right to left directional languages like Arabic,Persian,Hebrew and Urdu.",
     "keywords": [
         "bootstrap",
@@ -25,7 +25,8 @@
         "gulp-autoprefixer": "^4.0.0",
         "gulp-clean-css": "^3.7.0",
         "gulp-rename": "^1.2.2",
-        "del": "^3.0.0"
+        "del": "^3.0.0",
+        "gulp-header": "^2.0.1"
     },
     "scripts": {},
     "repository": {
