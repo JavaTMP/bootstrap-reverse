@@ -24,10 +24,10 @@ gulp.task('delete-css', function () {
 
 gulp.task('sass', ["delete-css"], function () {
     return gulp.src([
-        './sass/bootstrap-foundation.scss',
-        './sass/bootstrap-reverse.scss',
-        './sass/bootstrap-ltr-extender.scss',
-        './sass/bootstrap-extender.scss'
+        './src/bootstrap-foundation.scss',
+        './src/bootstrap-reverse.scss',
+        './src/bootstrap-ltr-extender.scss',
+        './src/bootstrap-extender.scss'
     ])
             .pipe(sass().on('error', sass.logError))
             .pipe(autoprefixer({
