@@ -1,6 +1,6 @@
 {
     "name": "bootstrap-reverse",
-    "version": "1.0.7",
+    "version": "1.0.8",
     "description": "Bootstrap 4 RTL for Right to left directional languages like Arabic,Persian,Hebrew and Urdu.",
     "keywords": [
         "bootstrap",
@@ -16,8 +16,8 @@
     "contributors": [],
     "dependencies": {
         "jquery": "^3.3.1",
-        "popper.js": "1.14.0",
-        "bootstrap": "4.1.0"
+        "popper.js": "1.14.3",
+        "bootstrap": "4.1.1"
     },
     "devDependencies": {
         "gulp": "^3.9.1",
