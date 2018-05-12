@@ -563,6 +563,20 @@ ar: "ملف"
     }
 }
 
+// From @import "../node_modules/bootstrap/scss/breadcrumb";
+
+.breadcrumb-item {
+    // The separator between breadcrumbs (by default, a forward-slash: "/")
+    + .breadcrumb-item {
+        padding-left: 0;
+        padding-right: $breadcrumb-item-padding;
+        &::before {
+            padding-right: 0;
+            padding-left: $breadcrumb-item-padding;
+        }
+    }
+}
+
 // From @import "../node_modules/bootstrap/scss/pagination";
 
 .page-link {
