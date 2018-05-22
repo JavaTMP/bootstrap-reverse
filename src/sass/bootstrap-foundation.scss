@@ -445,13 +445,15 @@ caption {
 }
 
 .custom-control-label {
-    // Background-color and (when enabled) gradient
     &::before {
-        right: 0;
+        left: 0;
+        right: -$custom-control-gutter;
+
     }
 
     &::after {
-        right: 0;
+        left: 0;
+        right: -$custom-control-gutter;
     }
 }
 
