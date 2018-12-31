@@ -1,8 +1,6 @@
 # bootstrap-reverse
 Bootstrap 4 RTL for Right to left directional languages like Arabic,Persian,Hebrew and Urdu.
 
-[![](https://data.jsdelivr.com/v1/package/npm/bootstrap-modal-wrapper/badge)](https://www.jsdelivr.com/package/npm/bootstrap-modal-wrapper)
-
 ## Which languages are written right-to-left (RTL)?
 The following W3C web page provides a good information for RTL languages http://www.i18nguy.com/temp/rtl.html.
 
