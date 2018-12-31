@@ -436,7 +436,7 @@ caption {
 
 .custom-control {
     padding-left: 0;
-    padding-right: $custom-control-gutter;
+    padding-right: $custom-control-gutter + $custom-control-indicator-size;
 }
 
 .custom-control-inline {
@@ -447,13 +447,13 @@ caption {
 .custom-control-label {
     &::before {
         left: 0;
-        right: -$custom-control-gutter;
+        right: -($custom-control-gutter + $custom-control-indicator-size);
 
     }
 
     &::after {
         left: 0;
-        right: -$custom-control-gutter;
+        right: -($custom-control-gutter + $custom-control-indicator-size);
     }
 }
 
@@ -666,7 +666,7 @@ ar: "ملف"
 .modal-header {
     .close {
         // auto on the right force icon to the right even when there is no .modal-title
-        margin: (-$modal-header-padding) auto (-$modal-header-padding) (-$modal-header-padding);
+        margin: (-$modal-header-padding-y) auto (-$modal-header-padding-y) (-$modal-header-padding-x);
     }
 }
 
@@ -693,7 +693,6 @@ ar: "ملف"
     @supports (transform-style: preserve-3d) {
         transform: translate3d(100%, 0, 0);
     }
-
 }
 
 .carousel-control-prev {
