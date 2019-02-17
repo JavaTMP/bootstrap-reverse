@@ -581,6 +581,10 @@ ar: "ملف"
 
 // From @import "../node_modules/bootstrap/scss/pagination";
 
+.pagination {
+    padding-right: 0;
+}
+
 .page-link {
     margin-left: 0;
     margin-right: -$pagination-border-width;

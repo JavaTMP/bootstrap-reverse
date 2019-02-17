@@ -21,8 +21,8 @@
 @each $breakpoint in map-keys($grid-breakpoints) {
     @include media-breakpoint-up($breakpoint) {
         $infix: breakpoint-infix($breakpoint, $grid-breakpoints);
-        .float#{$infix}-start {@include float-right;}
-        .float#{$infix}-end {@include float-left;}
+        .float#{$infix}-start {float: right !important;}
+        .float#{$infix}-end {float: left !important;}
     }
 }
 
