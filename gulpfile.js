@@ -18,11 +18,11 @@ var banner = ['/*!',
     ' */',
     ''].join('\n');
 
-gulp.task('delete-css', function () {
-    return del(['./dist/**/*']);
+gulp.task('delete-css', function (cb) {
+    return del.sync(['./dist/**/*'], cb());
 });
 
-gulp.task('sass', ["delete-css"], function () {
+gulp.task('sass', gulp.series("delete-css", function (cb) {
     return gulp.src([
         './src/bootstrap-foundation.scss',
         './src/bootstrap-reverse.scss',
@@ -38,9 +38,9 @@ gulp.task('sass', ["delete-css"], function () {
             .pipe(cleanCSS())
             .pipe(rename({suffix: '.min'}))
             .pipe(gulp.dest('./dist/'));
-});
+}));
 
-gulp.task('default', ["sass"], function () {
+gulp.task('default', gulp.series("sass", function (cb) {
     // place code for your default task here
-
-});
+    cb();
+}));
